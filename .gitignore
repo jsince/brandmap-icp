@@ -2,3 +2,8 @@
 *.log
 .env
 
+# Internal documentation (not for public repo)
+PROJECT-STATUS.md
+IMPLEMENTATION-NOTES.md
+DEVELOPMENT-LOG.md
+

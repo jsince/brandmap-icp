@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrandMap - Keyword Navigator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .keyword-search-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .search-section {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-header h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .search-header p {
+            font-size: 1rem;
+            color: #6b7280;
+        }
+
+        .search-input-group {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-btn {
+            padding: 0.75rem 2rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .search-btn:hover {
+            background: #5568d3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(102, 126, 234, 0.2);
+        }
+
+        .search-btn:active {
+            transform: translateY(0);
+        }
+
+        .results-section {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .results-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .results-count {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .results-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .result-item {
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            transition: all 0.2s;
+            background: #fafafa;
+        }
+
+        .result-item:hover {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .result-url {
+            font-size: 0.875rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 0.5rem;
+            word-break: break-all;
+        }
+
+        .result-url:hover {
+            text-decoration: underline;
+        }
+
+        .result-snippet {
+            font-size: 0.875rem;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .result-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.75rem;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .result-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .keyword-highlight {
+            background: #fef3c7;
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #6b7280;
+        }
+
+        .no-results-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .no-results h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .no-results p {
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .search-input-group {
+                flex-direction: column;
+            }
+
+            .search-btn {
+                width: 100%;
+            }
+
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>BrandMap</h1>
+                    <p>Define your Ideal Customer Profile for B2B SaaS</p>
+                </div>
+                <div class="header-center">
+                    <div class="secondary-nav">Keyword Navigator</div>
+                </div>
+                <div class="header-right">
+                    <!-- Empty for now, can add actions later -->
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="keyword-search-container">
+                <!-- Search Section -->
+                <div class="search-section">
+                    <div class="search-header">
+                        <h2>Keyword Search</h2>
+                        <p>Search for keywords across your sitemap to find relevant URLs</p>
+                    </div>
+                    <div class="search-input-group">
+                        <input 
+                            type="text" 
+                            id="keywordInput" 
+                            class="search-input" 
+                            placeholder="Enter keyword to search (e.g., pricing, features, contact)"
+                            value="pricing"
+                        />
+                        <button class="search-btn" id="searchBtn">Search</button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section">
+                    <div class="results-header">
+                        <div>
+                            <h3 class="results-title">Search Results</h3>
+                            <div class="results-count" id="resultsCount">8 URLs found</div>
+                        </div>
+                    </div>
+                    <div class="results-list" id="resultsList">
+                        <!-- Results will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Simple search functionality for demo
+        const searchBtn = document.getElementById('searchBtn');
+        const keywordInput = document.getElementById('keywordInput');
+        const resultsList = document.getElementById('resultsList');
+        const resultsCount = document.getElementById('resultsCount');
+
+        // Test data for different keywords
+        const testData = {
+            'pricing': [
+                {
+                    url: 'https://example.com/plans',
+                    snippet: 'Found in page heading (H1) and body text. The keyword "pricing" appears 3 times throughout the main content area, including in the primary call-to-action section.',
+                    matches: 3,
+                    type: 'Page',
+                    location: 'Page heading (H1) and body text'
+                },
+                {
+                    url: 'https://example.com/enterprise',
+                    snippet: 'Found in meta description and footer. The keyword appears in the page meta tags and in the footer pricing comparison section.',
+                    matches: 2,
+                    type: 'Page',
+                    location: 'Meta description and footer'
+                },
+                {
+                    url: 'https://example.com/tools/revenue',
+                    snippet: 'Found in body text and image alt tags. The keyword appears in the main content discussing revenue optimization tools and in descriptive alt text for pricing-related images.',
+                    matches: 2,
+                    type: 'Page',
+                    location: 'Body text and image alt tags'
+                },
+                {
+                    url: 'https://example.com/blog/strategy-guide',
+                    snippet: 'Found in article title, headings (H2, H3), and throughout body content. The keyword appears 4 times including in the main article title and multiple section headings.',
+                    matches: 4,
+                    type: 'Blog Post',
+                    location: 'Article title, headings, and body content'
+                },
+                {
+                    url: 'https://example.com/help/faq',
+                    snippet: 'Found in FAQ questions and answers. The keyword appears in both the question text and detailed answer sections throughout the FAQ page.',
+                    matches: 2,
+                    type: 'Help Article',
+                    location: 'FAQ questions and answers'
+                },
+                {
+                    url: 'https://example.com/resources/calculator',
+                    snippet: 'Found in tool description and button labels. The keyword appears in the calculator tool description and in interactive button text.',
+                    matches: 2,
+                    type: 'Tool',
+                    location: 'Tool description and button labels'
+                },
+                {
+                    url: 'https://example.com/compare',
+                    snippet: 'Found in comparison table headers and cell content. The keyword appears in table column headers and within comparison data cells.',
+                    matches: 2,
+                    type: 'Comparison',
+                    location: 'Comparison table headers and cells'
+                },
+                {
+                    url: 'https://example.com/sales',
+                    snippet: 'Found in contact form labels and page description. The keyword appears in form field labels and the page description text.',
+                    matches: 2,
+                    type: 'Contact Page',
+                    location: 'Contact form labels and page description'
+                }
+            ],
+            'features': [
+                {
+                    url: 'https://example.com/product',
+                    snippet: 'Found in page heading and feature list. The keyword "features" appears 5 times in the main heading, subheadings, and throughout the feature list descriptions.',
+                    matches: 5,
+                    type: 'Page',
+                    location: 'Page heading and feature list'
+                },
+                {
+                    url: 'https://example.com/automation',
+                    snippet: 'Found in body paragraphs and sidebar content. The keyword appears in main content paragraphs and in the sidebar feature highlights section.',
+                    matches: 3,
+                    type: 'Page',
+                    location: 'Body paragraphs and sidebar content'
+                },
+                {
+                    url: 'https://example.com/analytics',
+                    snippet: 'Found in section headings and data visualization descriptions. The keyword appears in H2 headings and in descriptions of analytics capabilities.',
+                    matches: 2,
+                    type: 'Page',
+                    location: 'Section headings and data visualization descriptions'
+                }
+            ],
+            'contact': [
+                {
+                    url: 'https://example.com/get-started',
+                    snippet: 'Found in page title and CTA buttons. The keyword "contact" appears in the page title tag and in multiple call-to-action button texts.',
+                    matches: 2,
+                    type: 'Page',
+                    location: 'Page title and CTA buttons'
+                },
+                {
+                    url: 'https://example.com/support',
+                    snippet: 'Found in navigation menu and help text. The keyword appears in the main navigation menu item and in help text throughout the support page.',
+                    matches: 1,
+                    type: 'Page',
+                    location: 'Navigation menu and help text'
+                }
+            ]
+        };
+
+        function highlightKeyword(text, keyword) {
+            if (!keyword) return text;
+            const regex = new RegExp(`(${keyword})`, 'gi');
+            return text.replace(regex, '<span class="keyword-highlight">$1</span>');
+        }
+
+        function renderResults(keyword) {
+            const keywordLower = keyword.toLowerCase();
+            let results = [];
+            
+            // Find matching results
+            Object.keys(testData).forEach(key => {
+                if (keywordLower.includes(key) || key.includes(keywordLower)) {
+                    results = [...results, ...testData[key]];
+                }
+            });
+
+            // If no exact match, use default
+            if (results.length === 0) {
+                results = testData['pricing'] || [];
+            }
+
+            // Render results
+            resultsList.innerHTML = results.map(result => {
+                return `
+                    <div class="result-item">
+                        <a href="${result.url}" class="result-url" target="_blank">
+                            ${result.url}
+                        </a>
+                        <div class="result-snippet">
+                            ${result.snippet}
+                        </div>
+                        <div class="result-meta">
+                            <span class="result-meta-item">📄 ${result.type}</span>
+                            <span class="result-meta-item">📍 ${result.location || 'Body text'}</span>
+                            <span class="result-meta-item">🔍 ${result.matches} matches</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            resultsCount.textContent = `${results.length} URL${results.length !== 1 ? 's' : ''} found`;
+        }
+
+        searchBtn.addEventListener('click', () => {
+            const keyword = keywordInput.value.trim();
+            if (keyword) {
+                renderResults(keyword);
+            }
+        });
+
+        keywordInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchBtn.click();
+            }
+        });
+
+        // Initial render with default keyword
+        renderResults('pricing');
+    </script>
+</body>
+</html>
+

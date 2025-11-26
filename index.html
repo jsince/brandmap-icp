@@ -337,6 +337,67 @@
         </main>
     </div>
 
+    <!-- AI Chatbot -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-header-content">
+                    <div class="chatbot-title">
+                        <img src="brandmap-icp/images/im6age.png" alt="AI Assistant" class="chatbot-icon" />
+                        <span>AI Assistant</span>
+                    </div>
+                    <button class="chatbot-close" id="chatbotClose" aria-label="Close chatbot">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chatbot-message chatbot-message-bot">
+                    <div class="message-content">
+                        <p>Hi! I'm your AI assistant. I can help you with questions about filling out your Ideal Customer Profile. What would you like to know?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input-container">
+                <input 
+                    type="file" 
+                    id="chatbotFileInput" 
+                    class="chatbot-file-input" 
+                    multiple
+                    aria-label="Upload file"
+                />
+                <label for="chatbotFileInput" class="chatbot-file-btn" aria-label="Attach file">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 7V3C13 2.46957 12.7893 1.96086 12.4142 1.58579C12.0391 1.21071 11.5304 1 11 1H5C4.46957 1 3.96086 1.21071 3.58579 1.58579C3.21071 1.96086 3 2.46957 3 3V13C3 13.5304 3.21071 14.0391 3.58579 14.4142C3.96086 14.7893 4.46957 15 5 15H11M9 9L11 7M11 7L13 9M11 7V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </label>
+                <input 
+                    type="text" 
+                    id="chatbotInput" 
+                    class="chatbot-input" 
+                    placeholder="Ask me anything about your ICP..."
+                    aria-label="Chatbot input"
+                />
+                <button class="chatbot-send" id="chatbotSend" aria-label="Send message">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 2L9 11M18 2L12 18L9 11M18 2L2 8L9 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="chatbot-attachments" id="chatbotAttachments" style="display: none;">
+                <!-- Attached files will appear here -->
+            </div>
+        </div>
+        <button class="chatbot-toggle" id="chatbotToggle" aria-label="Open chatbot">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="chatbot-badge" id="chatbotBadge" style="display: none;">1</span>
+        </button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
